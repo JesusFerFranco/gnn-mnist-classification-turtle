@@ -8,7 +8,6 @@ from torch.utils.data import DataLoader
 from gnn_image_classification.datasets import build_train_val_dataloaders
 from gnn_image_classification.model import GNNImageClassificator
 from gnn_image_classification.visualize_graphs import visualize
-from torch_geometric.datasets import TURTLESuperpixels
 
 import os
 from typing import Callable, List, Optional
