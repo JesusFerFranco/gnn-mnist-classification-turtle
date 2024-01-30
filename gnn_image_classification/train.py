@@ -4,12 +4,52 @@ import click
 import torch
 import wandb
 from torch.utils.data import DataLoader
-from torch_geometric.datasets import TURTLESuperpixels
+#from torch_geometric.datasets import TURTLESuperpixels
 
 from gnn_image_classification.datasets import build_train_val_dataloaders
 from gnn_image_classification.model import GNNImageClassificator
 from gnn_image_classification.visualize_graphs import visualize
 
+import os
+from typing import Callable, List, Optional
+
+import torch
+
+from torch_geometric.data import (
+    Data,
+    InMemoryDataset
+)
+
+
+class TURTLESuperpixels(InMemoryDataset):
+    def __init__(
+        self, root, transform= None, pre_transform = None,
+    ) -> None:
+        super(TURTLESuperpixels).__init__(root, transform, pre_transform)
+
+    @property
+    def raw_file_names(self) -> str:
+        return 'TURTLESUPERPIXEL.pt'
+
+    @property
+    def processed_file_names(self) -> List[str]:
+        return ['train_data_Turtle.pt', 'test_data_Turtle.pt']
+
+    def download(self):
+      pass
+
+    def process(self) -> None:
+        inputs = torch.load(self.raw_paths[0])
+        for i in range(len(inputs)):
+            data_list = [Data(**data_dict) for data_dict in inputs[i]]
+
+            if self.pre_filter is not None:
+                data_list = [d for d in data_list if self.pre_filter(d)]
+
+            if self.pre_transform is not None:
+                data_list = [self.pre_transform(d) for d in data_list]
+
+            self.save(data_list, self.processed_paths[i])
 
 def train_one_epoch(
     model: GNNImageClassificator,
