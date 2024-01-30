@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import torch_geometric
 from matplotlib import pyplot as plt
-from torch_geometric.datasets import TURTLESuperpixels
+#from torch_geometric.datasets import TURTLESuperpixels
 
 #from gnn_image_classification.datasets import build_mnist_superpixels_dataset
 
