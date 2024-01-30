@@ -1,7 +1,6 @@
 import torch
 from torch.utils.data import DataLoader
 from torch_geometric.data import Data
-from torch_geometric.datasets.mnist_superpixels import MNISTSuperpixels
 
 import os
 from typing import Callable, List, Optional
