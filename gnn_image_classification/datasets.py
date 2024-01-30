@@ -3,10 +3,52 @@ from torch.utils.data import DataLoader
 from torch_geometric.data import Data
 from torch_geometric.datasets.mnist_superpixels import MNISTSuperpixels
 
+import os
+from typing import Callable, List, Optional
 
-def build_mnist_superpixels_dataset(train: bool) -> MNISTSuperpixels:
-    return MNISTSuperpixels(
-        root="mnist-superpixels-dataset",
+import torch
+
+from torch_geometric.data import (
+    Data,
+    InMemoryDataset
+)
+
+
+class TURTLESuperpixels(InMemoryDataset):
+    def __init__(
+        self, root, transform= None, pre_transform = None,
+    ) -> None:
+        super(TURTLESuperpixels).__init__(root, transform, pre_transform)
+
+    @property
+    def raw_file_names(self) -> str:
+        return 'TURTLESUPERPIXEL.pt'
+
+    @property
+    def processed_file_names(self) -> List[str]:
+        return ['train_data_Turtle.pt', 'test_data_Turtle.pt']
+
+    def download(self):
+      pass
+
+    def process(self) -> None:
+        inputs = torch.load(self.raw_paths[0])
+        for i in range(len(inputs)):
+            data_list = [Data(**data_dict) for data_dict in inputs[i]]
+
+            if self.pre_filter is not None:
+                data_list = [d for d in data_list if self.pre_filter(d)]
+
+            if self.pre_transform is not None:
+                data_list = [self.pre_transform(d) for d in data_list]
+
+            self.save(data_list, self.processed_paths[i])
+
+
+
+def build_mnist_superpixels_dataset(train: bool) -> TURTLESuperpixels:
+    return TURTLESuperpixels(
+        root="turtles-superpixels-dataset",
         train=train,
     )
 
@@ -38,7 +80,7 @@ def build_collate_fn(device: str | torch.device):
 
 
 def build_dataloader(
-    dataset: MNISTSuperpixels,
+    dataset: TURTLESuperpixels,
     batch_size: int,
     shuffle: bool,
     device: str | torch.device,
@@ -54,8 +96,12 @@ def build_dataloader(
 
 
 def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoader, DataLoader]:
-    train_dataset = build_mnist_superpixels_dataset(train=True)
-    val_dataset = build_mnist_superpixels_dataset(train=False)
+  
+    train_filename = "train_data_Turtle.pt"
+    test_filename = "test_data_Turtle.pt"
+    
+    train_dataset =  torch.load(train_filename)
+    val_dataset = torch.load(test_filename)
 
     train_loader = build_dataloader(
         dataset=train_dataset,
