@@ -13,13 +13,53 @@ from torch_geometric.data import (
 )
 
 
+import os
+from typing import Callable, List, Optional
+
+import torch
+
+from torch_geometric.data import (
+    Data,
+    InMemoryDataset
+)
 
 
-#def build_mnist_superpixels_dataset(train: bool) -> TURTLESuperpixels:
- #   return TURTLESuperpixels(
-  #      root="turtles-superpixels-dataset",
-   #     train=train,
-    #)
+class TURTLESuperpixels(InMemoryDataset):
+    def __init__(
+        self, root, transform= None, pre_transform = None,
+    ) -> None:
+        super(TURTLESuperpixels).__init__(root, transform, pre_transform)
+
+    @property
+    def raw_file_names(self) -> str:
+        return 'TURTLESUPERPIXEL.pt'
+
+    @property
+    def processed_file_names(self) -> List[str]:
+        return ['train_data_Turtle.pt', 'test_data_Turtle.pt']
+
+    def download(self):
+      pass
+
+    def process(self) -> None:
+        inputs = torch.load(self.raw_paths[0])
+        for i in range(len(inputs)):
+            data_list = [Data(**data_dict) for data_dict in inputs[i]]
+
+            if self.pre_filter is not None:
+                data_list = [d for d in data_list if self.pre_filter(d)]
+
+            if self.pre_transform is not None:
+                data_list = [self.pre_transform(d) for d in data_list]
+
+            self.save(data_list, self.processed_paths[i])
+
+
+def build_mnist_superpixels_dataset(train: bool) -> TURTLESuperpixels:
+    return TURTLESuperpixels(
+        root="turtles-superpixels-dataset",
+        train=train,
+    )
 
 
 def build_collate_fn(device: str | torch.device):
