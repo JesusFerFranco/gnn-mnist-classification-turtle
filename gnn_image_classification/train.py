@@ -118,17 +118,17 @@ def train(
 
     # SAVE VISUALIZATION
     # POSIBLE ERROR, omitir la visualización de all clases and oneclass
-    visualize(
-        cast(MNISTSuperpixels, train_loader.dataset),
-        image_name="all_classes.jpg",
-    )
+   # visualize(
+    #    cast(MNISTSuperpixels, train_loader.dataset),
+     #   image_name="all_classes.jpg",
+    #)
 
-    visualize(
-        cast(MNISTSuperpixels, train_loader.dataset),
-        image_name="one_class.jpg",
-        classes=(4,),
-        examples_per_class=1,
-    )
+    #visualize(
+     #   cast(MNISTSuperpixels, train_loader.dataset),
+      #  image_name="one_class.jpg",
+       # classes=(4,),
+       # examples_per_class=1,
+    #)
 
     wandb.log({
         "sample_images": [
