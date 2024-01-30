@@ -45,11 +45,11 @@ class TURTLESuperpixels(InMemoryDataset):
 
 
 
-def build_mnist_superpixels_dataset(train: bool) -> TURTLESuperpixels:
-    return TURTLESuperpixels(
-        root="turtles-superpixels-dataset",
-        train=train,
-    )
+#def build_mnist_superpixels_dataset(train: bool) -> TURTLESuperpixels:
+ #   return TURTLESuperpixels(
+  #      root="turtles-superpixels-dataset",
+   #     train=train,
+    #)
 
 
 def build_collate_fn(device: str | torch.device):
