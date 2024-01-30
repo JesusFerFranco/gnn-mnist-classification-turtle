@@ -2,9 +2,6 @@ import cv2
 import numpy as np
 import torch_geometric
 from matplotlib import pyplot as plt
-#from torch_geometric.datasets import TURTLESuperpixels
-
-#from gnn_image_classification.datasets import build_mnist_superpixels_dataset
 
 
 def superpixels_to_2d_image(rec: torch_geometric.data.Data, scale: int = 30, edge_width: int = 1) -> np.ndarray:
