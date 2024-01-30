@@ -4,7 +4,7 @@ import click
 import torch
 import wandb
 from torch.utils.data import DataLoader
-from torch_geometric.datasets import MNISTSuperpixels
+#from torch_geometric.datasets import MNISTSuperpixels
 
 
 from gnn_image_classification.datasets import build_train_val_dataloaders
