@@ -4,7 +4,7 @@ import click
 import torch
 import wandb
 from torch.utils.data import DataLoader
-from torch_geometric.datasets import MNISTSuperpixels
+from torch_geometric.datasets import TURTLESuperpixels
 
 from gnn_image_classification.datasets import build_train_val_dataloaders
 from gnn_image_classification.model import GNNImageClassificator
@@ -108,12 +108,12 @@ def train(
 
     # SAVE VISUALIZATION
     visualize(
-        cast(MNISTSuperpixels, train_loader.dataset),
+        cast(TURTLESuperpixels, train_loader.dataset),
         image_name="all_classes.jpg",
     )
 
     visualize(
-        cast(MNISTSuperpixels, train_loader.dataset),
+        cast(TURTLESuperpixels, train_loader.dataset),
         image_name="one_class.jpg",
         classes=(4,),
         examples_per_class=1,
