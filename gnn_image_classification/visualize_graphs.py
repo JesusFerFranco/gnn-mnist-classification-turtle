@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import torch_geometric
 from matplotlib import pyplot as plt
-from torch_geometric.datasets import MNISTSuperpixels
+from torch_geometric.datasets import TURTLESuperpixels
 
 from gnn_image_classification.datasets import build_mnist_superpixels_dataset
 
@@ -75,8 +75,11 @@ def visualize(
 
 
 if __name__ == "__main__":
-    train_dataset = build_mnist_superpixels_dataset(train=True)
-    test_dataset = build_mnist_superpixels_dataset(train=False)
+    train_filename = "train_data_Turtle.pt"
+    test_filename = "test_data_Turtle.pt"
+    
+    train_dataset =  torch.load(train_filename)
+    test_dataset = torch.load(test_filename)
 
     visualize(
         train_dataset,
