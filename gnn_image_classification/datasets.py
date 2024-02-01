@@ -123,8 +123,8 @@ def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoade
     
     #train_dataset =  torch.load(train_filename)
     #val_dataset = torch.load(test_filename)
-    train_dataset=build_mnist_superpixels_dataset(train: bool)
-    val_dataset=build_mnist_superpixels_dataset(train: bool)
+    train_dataset=build_mnist_superpixels_dataset(train: True)
+    val_dataset=build_mnist_superpixels_dataset(train: False)
     train_loader = build_dataloader(
         dataset=train_dataset,
         batch_size=batch_size,
