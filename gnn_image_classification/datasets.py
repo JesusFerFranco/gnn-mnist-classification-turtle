@@ -55,11 +55,8 @@ class TURTLESuperpixels(InMemoryDataset):
             self.save(data_list, self.processed_paths[i])
 
 
-def build_mnist_superpixels_dataset(train: bool) -> TURTLESuperpixels:
-    return TURTLESuperpixels(
-      root="turtles-superpixels-dataset",
-        train=train,
-    )
+def build_mnist_superpixels_dataset() -> TURTLESuperpixels:
+    return TURTLESuperpixels()
 
 
 def build_collate_fn(device: str | torch.device):
@@ -123,8 +120,8 @@ def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoade
     
     #train_dataset =  torch.load(train_filename)
     #val_dataset = torch.load(test_filename)
-    train_dataset=build_mnist_superpixels_dataset(train: True)
-    val_dataset=build_mnist_superpixels_dataset(train: False)
+    train_dataset=build_mnist_superpixels_dataset()
+    val_dataset=build_mnist_superpixels_dataset()
     train_loader = build_dataloader(
         dataset=train_dataset,
         batch_size=batch_size,
