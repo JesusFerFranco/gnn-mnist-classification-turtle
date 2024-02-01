@@ -56,7 +56,9 @@ class TURTLESuperpixels(InMemoryDataset):
 
 
 def build_mnist_superpixels_dataset() -> TURTLESuperpixels:
-    return TURTLESuperpixels()
+    return TURTLESuperpixels(
+        root="gnn_image_classification"
+    )
 
 
 def build_collate_fn(device: str | torch.device):
