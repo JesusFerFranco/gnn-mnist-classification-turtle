@@ -108,22 +108,23 @@ def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoade
   
 
     # URL del archivo crudo en GitHub
-    train_url = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/train_data_Turtle.pt"
-    test_url = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/test_data_Turtle.pt"
+ #   train_url = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/train_data_Turtle.pt"
+  #  test_url = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/test_data_Turtle.pt"
 
     # Descargar el archivo y cargar los datos
-    train_response = requests.get(train_url)
-    train_dataset = torch.as_tensor(train_response.content)
+   # train_response = requests.get(train_url)
+    #train_dataset = torch.as_tensor(train_response.content)
 
-    test_response = requests.get(test_url)
-    val_dataset = torch.as_tensor(test_response.content)
+    #test_response = requests.get(test_url)
+    #val_dataset = torch.as_tensor(test_response.content)
 
    # train_filename = "train_data_Turtle.pt"
     #test_filename = "test_data_Turtle.pt"
     
     #train_dataset =  torch.load(train_filename)
     #val_dataset = torch.load(test_filename)
-
+    train_dataset=build_mnist_superpixels_dataset(train: bool)
+    val_dataset=build_mnist_superpixels_dataset(train: bool)
     train_loader = build_dataloader(
         dataset=train_dataset,
         batch_size=batch_size,
