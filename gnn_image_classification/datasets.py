@@ -28,7 +28,7 @@ class TURTLESuperpixels(InMemoryDataset):
     def __init__(
         self, root
     ) -> None:
-        super(TURTLESuperpixels).__init__(root)
+        super().__init__(root)
 
     @property
     def raw_file_names(self) -> str:
