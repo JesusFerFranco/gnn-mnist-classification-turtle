@@ -26,9 +26,9 @@ from torch_geometric.data import (
 
 class TURTLESuperpixels(InMemoryDataset):
     def __init__(
-        self, root, transform= None, pre_transform = None,
+        self, root
     ) -> None:
-        super(TURTLESuperpixels).__init__(self, root, transform, pre_transform)
+        super(TURTLESuperpixels).__init__(root)
 
     @property
     def raw_file_names(self) -> str:
