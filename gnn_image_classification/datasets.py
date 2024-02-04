@@ -29,35 +29,40 @@ from torch_geometric.data import (
 )
 
 
-#class TURTLESuperpixels(InMemoryDataset):
- #   def __init__(
-  #      self, root
-   # ) -> None:
-    #    super().__init__(root)
+class TURTLESuperpixels(InMemoryDataset):
+    def __init__(
+        self, root
+    ) -> None:
+        super().__init__(root)
 
-    #@property
-    #def raw_file_names(self) -> str:
-     #   return 'TURTLESUPERPIXEL.pt'
+    @property
+    def raw_file_names(self) -> str:
+        url_3 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/archivos.pkl"
+        response = requests.get(url_2)
+        data_bytess = response.content
+        # Deserializar el contenido usando pickle para obtener la lista de datos
+        data_listt = pickle.loads(data_bytess)
+        return data_listt
 
-    #@property
-    #def processed_file_names(self) -> List[str]:
-     #   return ['train_data_Turtle.pt', 'test_data_Turtle.pt']
+    @property
+    def processed_file_names(self) -> List[str]:
+        return ['train_data_Turtle.pt', 'test_data_Turtle.pt']
 
-    #def download(self):
-     # pass
+    def download(self):
+      pass
 
-    #def process(self) -> None:
-     #   inputs = torch.load(self.raw_paths[0])
-      #  for i in range(len(inputs)):
-       #     data_list = [Data(**data_dict) for data_dict in inputs[i]]
+    def process(self) -> None:
+        inputs = torch.load(self.raw_paths[0])
+        for i in range(len(inputs)):
+            data_list = [Data(**data_dict) for data_dict in inputs[i]]
 
-        #    if self.pre_filter is not None:
-         #       data_list = [d for d in data_list if self.pre_filter(d)]
+            if self.pre_filter is not None:
+                data_list = [d for d in data_list if self.pre_filter(d)]
 
-          #  if self.pre_transform is not None:
-           #     data_list = [self.pre_transform(d) for d in data_list]
+            if self.pre_transform is not None:
+                data_list = [self.pre_transform(d) for d in data_list]
 
-            #self.save(data_list, self.processed_paths[i])
+            self.save(data_list, self.processed_paths[i])
 
 
 #def build_mnist_superpixels_dataset() -> TURTLESuperpixels:
@@ -93,7 +98,7 @@ def build_collate_fn(device: str | torch.device):
 
 
 def build_dataloader(
-    dataset: MNISTSuperpixels,
+    dataset: TURTLESuperpixel,
     batch_size: int,
     shuffle: bool,
     device: str | torch.device,
