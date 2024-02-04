@@ -103,7 +103,7 @@ data_bytes = response.content
 data_list_2 = pickle.loads(data_bytes)
 def build_dataloader(
     #dataset: TURTLESuperpixels,
-    dataset : data_list_2
+    dataset: data_list_2
     batch_size: int,
     shuffle: bool,
     device: str | torch.device,
