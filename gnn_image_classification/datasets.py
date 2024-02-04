@@ -21,7 +21,7 @@ class TURTLESuperpixels(InMemoryDataset):
         super().__init__(root)
 
     @property
-    def raw_file_names(self) -> List:
+    def raw_file_names(self) -> str:
         url_3 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/archivos.pkl"
         response = requests.get(url_2)
         data_bytess = response.content
