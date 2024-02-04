@@ -21,13 +21,14 @@ class TURTLESuperpixels(InMemoryDataset):
         super().__init__(root)
 
     @property
-     def raw_file_names(self) -> list:
+    def raw_file_names(self) -> list:
         url_3 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/TURTLESUPERPIXEL.pt"
         response = requests.get(url_3)
         data_bytes = response.content
         # Cargar la lista de grafos directamente desde los bytes
         data_list = torch.load(io.BytesIO(data_bytes), map_location=torch.device('cpu'))
         return data_list
+
 
     @property
     def processed_file_names(self) -> List[str]:
