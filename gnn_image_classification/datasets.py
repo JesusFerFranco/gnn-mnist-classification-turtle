@@ -21,13 +21,13 @@ class TURTLESuperpixels(InMemoryDataset):
         super().__init__(root)
 
     @property
-    def raw_file_names(self) -> str:
-        url_3 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/archivos.pkl"
-        response = requests.get(url_2)
-        data_bytess = response.content
-        # Deserializar el contenido usando pickle para obtener la lista de datos
-        data_listt = pickle.loads(data_bytess)
-        return data_listt
+     def raw_file_names(self) -> list:
+        url_3 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/TURTLESUPERPIXEL.pt"
+        response = requests.get(url_3)
+        data_bytes = response.content
+        # Cargar la lista de grafos directamente desde los bytes
+        data_list = torch.load(io.BytesIO(data_bytes), map_location=torch.device('cpu'))
+        return data_list
 
     @property
     def processed_file_names(self) -> List[str]:
@@ -99,12 +99,13 @@ def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoade
 
 #OBTENER DATA_LISt    
 # Cargar la lista desde el archivo usando pickle
-    url_2 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/archivos.pkl"
+    url_2 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/TURTLESUPERPIXEL.pt"
     response = requests.get(url_2)
     data_bytes = response.content
     
     # Deserializar el contenido usando pickle para obtener la lista de datos
-    data_list = pickle.loads(data_bytes)
+    data_list = torch.load(io.BytesIO(data_bytes))
+
     # Definir el ratio de 80-20 prueba/entrenamiento
     train_ratio = 0.8
     test_ratio = 0.2
