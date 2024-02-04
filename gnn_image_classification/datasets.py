@@ -21,7 +21,7 @@ class TURTLESuperpixels(InMemoryDataset):
         super().__init__(root)
 
     @property
-    def raw_file_names(self) -> str:
+    def raw_file_names(self) -> List:
         url_3 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/archivos.pkl"
         response = requests.get(url_2)
         data_bytess = response.content
@@ -102,20 +102,21 @@ def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoade
     url_2 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/archivos.pkl"
     response = requests.get(url_2)
     data_bytes = response.content
+    
     # Deserializar el contenido usando pickle para obtener la lista de datos
     data_list = pickle.loads(data_bytes)
-    # Define la proporción de datos para el conjunto de entrenamiento y el conjunto de prueba
+    # Definir el ratio de 80-20 prueba/entrenamiento
     train_ratio = 0.8
     test_ratio = 0.2
-
-# Calcula el tamaño de cada conjunto de datos
+    
+    # Calcular el tamaño de cada conjunto de datos
     num_data = len(data_list)
     num_train = int(train_ratio * num_data)
     num_test = num_data - num_train
-# Divide el conjunto de datos en conjuntos de entrenamiento y prueba
+    
+    # Dividir el conjunto de datos en conjuntos de entrenamiento y prueba
     train_dataset, val_dataset = random_split(data_list, [num_train, num_test])
-#    train_dataset =  torch.load(train_filename)
- #   val_dataset = torch.load(test_filename)
+
   #  train_dataset=build_mnist_superpixels_dataset()
    # val_dataset=build_mnist_superpixels_dataset()
     
