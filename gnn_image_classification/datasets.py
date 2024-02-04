@@ -7,7 +7,8 @@ from typing import Callable, List, Optional
 from torch_geometric.datasets.mnist_superpixels import MNISTSuperpixels
 from torch_geometric.loader import DataLoader
 from torch.utils.data import random_split
-import pickle
+import io
+
 
 from torch_geometric.data import (
     Data,
