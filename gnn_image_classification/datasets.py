@@ -93,7 +93,7 @@ def build_collate_fn(device: str | torch.device):
 
 
 def build_dataloader(
-    dataset: DATASET,
+    dataset: Optional[Dataset] = None,
     batch_size: int,
     shuffle: bool,
     device: str | torch.device,
