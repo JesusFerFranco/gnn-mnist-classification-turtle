@@ -106,7 +106,6 @@ def build_dataloader(
 
 
 def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoader, DataLoader]:
-  
 
     # URL del archivo crudo en GitHub
     train_url = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/train_data_Turtle.pt"
@@ -114,10 +113,10 @@ def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoade
 
     # Descargar el archivo y cargar los datos
     train_response = requests.get(train_url)
-    train_dataset = torch.as_tensor(train_response.content)
+    train_dataset = torch.load(train_response.content)
 
     test_response = requests.get(test_url)
-    val_dataset = torch.as_tensor(test_response.content)
+    val_dataset = torch.load(test_response.content)
 
    # train_filename = "train_data_Turtle.pt"
   #  test_filename = "test_data_Turtle.pt"
