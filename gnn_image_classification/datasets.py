@@ -5,6 +5,9 @@ import requests
 import os
 from typing import Callable, List, Optional
 from torch_geometric.datasets.mnist_superpixels import MNISTSuperpixels
+from torch_geometric.loader import DataLoader
+from torch.utils.data import random_split
+import pickle
 
 
 import torch
@@ -120,7 +123,21 @@ def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoade
 
    # train_filename = "train_data_Turtle.pt"
   #  test_filename = "test_data_Turtle.pt"
-    
+#OBTENER DATA_LIST
+
+# Cargar la lista desde el archivo usando pickle
+    with open('archivos.pkl', 'rb') as f:
+       data_list = pickle.load(f) 
+    # Define la proporción de datos para el conjunto de entrenamiento y el conjunto de prueba
+    train_ratio = 0.8
+    test_ratio = 0.2
+
+# Calcula el tamaño de cada conjunto de datos
+    num_data = len(data_list)
+    num_train = int(train_ratio * num_data)
+    num_test = num_data - num_train
+# Divide el conjunto de datos en conjuntos de entrenamiento y prueba
+    train_dataset, val_dataset = random_split(data_list, [num_train, num_test])
 #    train_dataset =  torch.load(train_filename)
  #   val_dataset = torch.load(test_filename)
     train_dataset=build_mnist_superpixels_dataset()
