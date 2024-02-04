@@ -123,17 +123,14 @@ def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoade
 
    # train_filename = "train_data_Turtle.pt"
   #  test_filename = "test_data_Turtle.pt"
-#OBTENER DATA_LIST
-
+#OBTENER DATA_LISt
+    
 # Cargar la lista desde el archivo usando pickle
-    url = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/archivos.pkl"
-    response = requests.get(url)
+    url_2 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/archivos.pkl"
+    response = requests.get(url_2)
     data_bytes = response.content
     # Deserializar el contenido usando pickle para obtener la lista de datos
     data_list = pickle.loads(data_bytes)
-    
-    with open('archivos.pkl', 'rb') as f:
-       data_list = pickle.load(f) 
     # Define la proporción de datos para el conjunto de entrenamiento y el conjunto de prueba
     train_ratio = 0.8
     test_ratio = 0.2
