@@ -29,41 +29,41 @@ from torch_geometric.data import (
 )
 
 
-class TURTLESuperpixels(InMemoryDataset):
-    def __init__(
-        self, root
-    ) -> None:
-        super().__init__(root)
+#class TURTLESuperpixels(InMemoryDataset):
+ #   def __init__(
+  #      self, root
+   # ) -> None:
+    #    super().__init__(root)
 
-    @property
-    def raw_file_names(self) -> str:
-        return 'TURTLESUPERPIXEL.pt'
+    #@property
+    #def raw_file_names(self) -> str:
+     #   return 'TURTLESUPERPIXEL.pt'
 
-    @property
-    def processed_file_names(self) -> List[str]:
-        return ['train_data_Turtle.pt', 'test_data_Turtle.pt']
+    #@property
+    #def processed_file_names(self) -> List[str]:
+     #   return ['train_data_Turtle.pt', 'test_data_Turtle.pt']
 
-    def download(self):
-      pass
+    #def download(self):
+     # pass
 
-    def process(self) -> None:
-        inputs = torch.load(self.raw_paths[0])
-        for i in range(len(inputs)):
-            data_list = [Data(**data_dict) for data_dict in inputs[i]]
+    #def process(self) -> None:
+     #   inputs = torch.load(self.raw_paths[0])
+      #  for i in range(len(inputs)):
+       #     data_list = [Data(**data_dict) for data_dict in inputs[i]]
 
-            if self.pre_filter is not None:
-                data_list = [d for d in data_list if self.pre_filter(d)]
+        #    if self.pre_filter is not None:
+         #       data_list = [d for d in data_list if self.pre_filter(d)]
 
-            if self.pre_transform is not None:
-                data_list = [self.pre_transform(d) for d in data_list]
+          #  if self.pre_transform is not None:
+           #     data_list = [self.pre_transform(d) for d in data_list]
 
-            self.save(data_list, self.processed_paths[i])
+            #self.save(data_list, self.processed_paths[i])
 
 
-def build_mnist_superpixels_dataset() -> TURTLESuperpixels:
-    return TURTLESuperpixels(
-        root="gnn_image_classification"
-    )
+#def build_mnist_superpixels_dataset() -> TURTLESuperpixels:
+ #   return TURTLESuperpixels(
+   #     root="gnn_image_classification"
+  #  )
 
 
 def build_collate_fn(device: str | torch.device):
@@ -143,8 +143,8 @@ def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoade
     train_dataset, val_dataset = random_split(data_list, [num_train, num_test])
 #    train_dataset =  torch.load(train_filename)
  #   val_dataset = torch.load(test_filename)
-    train_dataset=build_mnist_superpixels_dataset()
-    val_dataset=build_mnist_superpixels_dataset()
+  #  train_dataset=build_mnist_superpixels_dataset()
+   # val_dataset=build_mnist_superpixels_dataset()
     
     train_loader = build_dataloader(
         dataset=train_dataset,
