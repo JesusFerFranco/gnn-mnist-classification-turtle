@@ -17,18 +17,6 @@ from torch_geometric.data import (
     InMemoryDataset
 )
 
-
-import os
-from typing import Callable, List, Optional
-
-import torch
-
-from torch_geometric.data import (
-    Data,
-    InMemoryDataset
-)
-
-
 class TURTLESuperpixels(InMemoryDataset):
     def __init__(
         self, root
@@ -95,7 +83,7 @@ def build_collate_fn(device: str | torch.device):
     return collate_fn
 
 def build_dataloader(
-    dataset: MNISTSuperpixels,
+    dataset: TURTLESuperpixels,
     batch_size: int,
     shuffle: bool,
     device: str | torch.device,
