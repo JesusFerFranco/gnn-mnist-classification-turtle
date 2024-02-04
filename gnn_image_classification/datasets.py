@@ -95,7 +95,7 @@ def build_collate_fn(device: str | torch.device):
     return collate_fn
 
 def build_dataloader(
-    dataset: TURTLESuperpixels,
+    dataset: MNISTSuperpixels,
     batch_size: int,
     shuffle: bool,
     device: str | torch.device,
