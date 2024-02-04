@@ -9,9 +9,6 @@ from torch_geometric.loader import DataLoader
 from torch.utils.data import random_split
 import pickle
 
-
-import torch
-
 from torch_geometric.data import (
     Data,
     InMemoryDataset
@@ -100,21 +97,7 @@ def build_dataloader(
 
 def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoader, DataLoader]:
 
-    # URL del archivo crudo en GitHub
-#    train_url = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/train_data_Turtle.pt"
- #   test_url = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/test_data_Turtle.pt"
-
-    # Descargar el archivo y cargar los datos
-  #  train_response = requests.get(train_url)
-   # train_dataset = torch.load(train_response.content)
-
-    #test_response = requests.get(test_url)
-    #val_dataset = torch.load(test_response.content)
-
-   # train_filename = "train_data_Turtle.pt"
-  #  test_filename = "test_data_Turtle.pt"
-#OBTENER DATA_LISt
-    
+#OBTENER DATA_LISt    
 # Cargar la lista desde el archivo usando pickle
     url_2 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/archivos.pkl"
     response = requests.get(url_2)
