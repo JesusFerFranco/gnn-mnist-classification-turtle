@@ -65,10 +65,10 @@ class TURTLESuperpixels(InMemoryDataset):
             self.save(data_list, self.processed_paths[i])
 
 
-#def build_mnist_superpixels_dataset() -> TURTLESuperpixels:
- #   return TURTLESuperpixels(
-   #     root="gnn_image_classification"
-  #  )
+def build_mnist_superpixels_dataset() -> TURTLESuperpixels:
+    return TURTLESuperpixels(
+        root="gnn_image_classification"
+    )
 
 
 def build_collate_fn(device: str | torch.device):
@@ -96,9 +96,14 @@ def build_collate_fn(device: str | torch.device):
 
     return collate_fn
 
-
+url_2 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/archivos.pkl"
+response = requests.get(url_2)
+data_bytes = response.content
+    # Deserializar el contenido usando pickle para obtener la lista de datos
+data_list_2 = pickle.loads(data_bytes)
 def build_dataloader(
-    dataset: TURTLESuperpixels,
+    #dataset: TURTLESuperpixels,
+    dataset : data_list_2
     batch_size: int,
     shuffle: bool,
     device: str | torch.device,
