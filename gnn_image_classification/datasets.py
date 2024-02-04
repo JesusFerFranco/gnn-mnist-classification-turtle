@@ -91,19 +91,11 @@ def build_collate_fn(device: str | torch.device):
             "batch_edge_indices": batch_edge_indices,
             "classes": torch.LongTensor(classes).to(device),
         }
-
         return collated
-
     return collate_fn
 
-url_2 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/archivos.pkl"
-response = requests.get(url_2)
-data_bytes = response.content
-    # Deserializar el contenido usando pickle para obtener la lista de datos
-data_list_2 = pickle.loads(data_bytes)
 def build_dataloader(
-    #dataset: TURTLESuperpixels,
-    dataset: data_list_2
+    dataset: TURTLESuperpixels,
     batch_size: int,
     shuffle: bool,
     device: str | torch.device,
