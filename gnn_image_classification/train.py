@@ -30,13 +30,10 @@ def train_one_epoch(
 ) -> int:
     model.train()
     for batch in train_loader:
-        batch_node_features = batch["batch_node_features"]
-        batch_edge_indices = batch["batch_edge_indices"]
-        classes = batch["classes"]
-        #batch_node_features = batch[0]
-        #batch_edge_indices = batch[0]
-        #classes = batch[0]
-
+        batch_node_features = batch.x
+        batch_edge_indices = batch.edge_index
+        classes = batch.y
+ 
         logits = model(batch_node_features=batch_node_features, batch_edge_indices=batch_edge_indices)
         predicted_classes = torch.argmax(logits, dim=1)
 
@@ -71,12 +68,10 @@ def evaluate(
     num_samples: int = 0
 
     for batch in val_loader:
-        batch_node_features = batch["batch_node_features"]
-        batch_edge_indices = batch["batch_edge_indices"]
-        classes = batch["classes"]
-        #batch_node_features = batch[0]
-        #batch_edge_indices = batch[0]
-        #classes = batch[0]
+        batch_node_features = batch.x
+        batch_edge_indices = batch.edge_index
+        classes = batch.y
+
 
         logits = model(batch_node_features=batch_node_features, batch_edge_indices=batch_edge_indices)
         predicted_classes = torch.argmax(logits, dim=1)
