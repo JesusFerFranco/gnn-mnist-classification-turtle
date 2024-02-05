@@ -71,7 +71,9 @@ def evaluate(
         batch_node_features = batch.x
         batch_edge_indices = batch.edge_index
         classes = batch.y
-
+        #batch_node_features = batch["batch_node_features"]
+        #batch_edge_indices = batch["batch_edge_indices"]
+        #classes = batch["classes"]
 
         logits = model(batch_node_features=batch_node_features, batch_edge_indices=batch_edge_indices)
         predicted_classes = torch.argmax(logits, dim=1)
