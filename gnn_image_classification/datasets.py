@@ -81,8 +81,19 @@ def build_collate_fn(device: str | torch.device):
         return collated
     return collate_fn
 
+#SE INTENTARÁ TOMAR LA LISTA GLOBAL DATA_LIST OBTENIDA DEL TURTLESUPERPIXEL
+
+#OBTENER DATA_LISt    
+# Cargar la lista desde el archivo uun url
+url_5 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/TURTLESUPERPIXEL.pt"
+response = requests.get(url_5)
+data_bytess = response.content
+    
+# Deserializar el contenido obtener la lista de datos
+data_listt = torch.load(io.BytesIO(data_bytess))
+
 def build_dataloader(
-    dataset: TURTLESuperpixels,
+    dataset: data_listt,
     batch_size: int,
     shuffle: bool,
     device: str | torch.device,
