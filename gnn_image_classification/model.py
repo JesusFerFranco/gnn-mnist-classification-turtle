@@ -34,8 +34,8 @@ class GNNImageClassificator(nn.Module):
         )
 
     def forward_one_base(self, node_features: torch.Tensor, edge_indices: torch.Tensor) -> torch.Tensor:
-     #   assert node_features.ndim == 2 and node_features.shape[1] == self.in_channels
-      #  assert edge_indices.ndim == 2 and edge_indices.shape[0] == 2
+        assert node_features.ndim == 2 and node_features.shape[1] == self.in_channels
+        assert edge_indices.ndim == 2 and edge_indices.shape[0] == 2
 
         x0 = node_features
 
@@ -51,7 +51,7 @@ class GNNImageClassificator(nn.Module):
 
     def forward(self, batch_node_features: list[torch.Tensor], batch_edge_indices: list[torch.Tensor]) -> torch.Tensor:
        # assert len(batch_node_features) == len(batch_edge_indices)
-        print("batch node y edge", batch_node_features, batch_edge_indices)
+        print("batch node y edge", len(batch_node_features), len(batch_edge_indices))
 
         features_list = []
         for node_features, edge_indices in zip(batch_node_features, batch_edge_indices):
