@@ -50,7 +50,7 @@ class GNNImageClassificator(nn.Module):
         return x0_x1_x2_x3
 
     def forward(self, batch_node_features: list[torch.Tensor], batch_edge_indices: list[torch.Tensor]) -> torch.Tensor:
-       # assert len(batch_node_features) == len(batch_edge_indices)
+        assert len(batch_node_features) == len(batch_edge_indices)
         print("batch node y edge", len(batch_node_features), len(batch_edge_indices))
 
         features_list = []
