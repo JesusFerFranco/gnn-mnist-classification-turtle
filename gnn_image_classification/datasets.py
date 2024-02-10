@@ -59,7 +59,8 @@ def build_mnist_superpixels_dataset() -> TURTLESuperpixels:
 
 
 def build_collate_fn(device: str | torch.device):
-    def collate_fn(original_batch: list[Data]):
+    #def collate_fn(original_batch: list[Data]):
+    def collate_fn(data_listt):
         batch_node_features: list[torch.Tensor] = []
         batch_edge_indices: list[torch.Tensor] = []
         classes: list[int] = []
