@@ -11,7 +11,7 @@ class GNNImageClassificator(nn.Module):
         self,
         in_channels: int = 3,
         hidden_dim: int = 152,
-        num_classes: int = 3,#hasta el momento sólo meti 3 tortugas
+        num_classes: int = 8,#hasta el momento sólo meti 3 tortugas
     ):
         super().__init__()
 
