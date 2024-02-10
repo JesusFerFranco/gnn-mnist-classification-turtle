@@ -85,8 +85,8 @@ def build_collate_fn(device: str | torch.device):
 
 #OBTENER DATA_LISt    
 # Cargar la lista desde el archivo uun url
-url_5 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/TURTLESUPERPIXEL.pt"
-response = requests.get(url_5)
+url_1 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/TURTLESUPERPIXEL.pt"
+response = requests.get(url_1)
 data_bytess = response.content
     
 # Deserializar el contenido obtener la lista de datos
@@ -112,28 +112,16 @@ def build_train_val_dataloaders(batch_size: int, device: str) -> tuple[DataLoade
 
 #OBTENER DATA_LISt    
 # Cargar la lista desde el archivo usando pickle
-    url_2 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/TURTLESUPERPIXEL.pt"
+    url_2 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/test_data_Turtle.pt"
     response = requests.get(url_2)
     data_bytes = response.content
-    
-    # Deserializar el contenido usando pickle para obtener la lista de datos
-    data_list = torch.load(io.BytesIO(data_bytes))
+    val_dataset = torch.load(io.BytesIO(data_bytes))
 
-    # Definir el ratio de 80-20 prueba/entrenamiento
-    train_ratio = 0.8
-    test_ratio = 0.2
-    
-    # Calcular el tamaño de cada conjunto de datos
-    num_data = len(data_list)
-    num_train = int(train_ratio * num_data)
-    num_test = num_data - num_train
-    
-    # Dividir el conjunto de datos en conjuntos de entrenamiento y prueba
-    train_dataset, val_dataset = random_split(data_list, [num_train, num_test])
+    url_3 = "https://raw.githubusercontent.com/JesusFerFranco/gnn-mnist-classification-turtle/master/gnn_image_classification/train_data_Turtle.pt"
+    response1 = requests.get(url_3)
+    data_bytes1 = response1.content
+    train_dataset = torch.load(io.BytesIO(data_bytes1))
 
-  #  train_dataset=build_mnist_superpixels_dataset()
-   # val_dataset=build_mnist_superpixels_dataset()
-    
     train_loader = build_dataloader(
         dataset=train_dataset,
         batch_size=batch_size,
