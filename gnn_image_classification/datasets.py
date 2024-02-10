@@ -63,11 +63,17 @@ def build_collate_fn(device: str | torch.device):
         batch_node_features: list[torch.Tensor] = []
         batch_edge_indices: list[torch.Tensor] = []
         classes: list[int] = []
-
         for data in original_batch:
+           # node_features = torch.cat((data.x, data.pos), dim=-1).to(device)
+           # edge_indices = data.edge_index.to(device)
+           # class_ = int(data.y)
+
+            #batch_node_features.append(node_features)
+            #batch_edge_indices.append(edge_indices)
+            #classes.append(class_)
             node_features = torch.cat((data.x, data.pos), dim=-1).to(device)
             edge_indices = data.edge_index.to(device)
-            class_ = int(data.y)
+            class_ = data.y.to(device)
 
             batch_node_features.append(node_features)
             batch_edge_indices.append(edge_indices)
